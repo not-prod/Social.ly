@@ -109,32 +109,44 @@ cd backend
 npm install
 ```
 
-3. Create a `.env` file in the backend directory with the following variables:
+3. Create a `config.env` file in the `backend/config` directory with the following variables:
 
 ```env
 # Server Configuration
 PORT=5000
 NODE_ENV=development
 
-# Database
+# Database Configuration
 MONGO_URI=mongodb://localhost:27017/socialy
 DB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/socialy
 
-# JWT Secret
+# JWT Configuration
 JWT_SECRET=your_super_secret_jwt_key_here
+JWT_EXPIRE=7d
+COOKIE_EXPIRE=7
 
-# Frontend URLs
-LOCAL_URL=http://localhost:3000
-WEB_URL=https://your-production-domain.com
+# OTP Configuration
+OTP_EXPIRE=300000
+OTP_ATTEMPTS_EXPIRE=300000
+LOGIN_OTP_EXPIRE=300000
+MAX_LOGIN_ATTEMPTS=5
+MAX_LOGIN_ATTEMPTS_EXPIRE=900000
+
+# SMTP/Email Configuration (Nodemailer)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_SERVICE=gmail
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_gmail_app_password
 
 # Cloudinary Configuration (for image uploads)
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
-# Email Configuration (Nodemailer)
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password
+# Frontend URLs (CORS)
+LOCAL_URL=http://localhost:3000
+WEB_URL=https://your-production-domain.com
 ```
 
 4. Start the backend server:
@@ -180,10 +192,15 @@ The frontend will run on `http://localhost:3000` and automatically open in your 
 2. Get your credentials from the dashboard
 3. Add them to your backend `.env` file
 
-### Email Configuration
-1. For Gmail, enable 2-factor authentication
-2. Generate an App Password from Google Account settings
-3. Use the App Password in the `EMAIL_PASS` variable
+### Email Configuration (SMTP)
+1. For Gmail, enable 2-factor authentication in your Google Account
+2. Generate an App Password from Google Account Security settings
+3. Use the following configuration:
+   - `SMTP_HOST`: smtp.gmail.com
+   - `SMTP_PORT`: 465
+   - `SMTP_SERVICE`: gmail
+   - `SMTP_USER`: Your Gmail address
+   - `SMTP_PASS`: Your generated App Password (not your regular password)
 
 ## 📜 Available Scripts
 
