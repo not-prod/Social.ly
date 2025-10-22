@@ -389,12 +389,21 @@ const ViewPostModal = ({ onLoad, onClose, postData }) => {
 
 
                     <div className="comment-input">
-                        <input
+                        <textarea
                             ref={commentInputRef}
-                            type="text"
                             placeholder="Add a comment..."
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
+                            rows={1}
+                            style={{resize: 'none'}}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    if (inputText.trim() !== "" && !loading && !replyLoading && !postLoading) {
+                                        handleSend();
+                                    }
+                                }
+                            }}
                         />
                         <button disabled={inputText.trim() === "" || loading || replyLoading || postLoading} onClick={() => handleSend()}>
                             <Send className="comment-icon" />
