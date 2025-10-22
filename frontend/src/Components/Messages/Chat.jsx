@@ -106,20 +106,11 @@ const Chat = ({selectedUser}) => {
         ))}
       </div>
       <div className="chat-input">
-        <textarea
+        <input
+          type="text"
           placeholder="Type a message..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          rows={1}
-          style={{resize: 'none'}}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              if (newMessage.trim() !== '' && !loading) {
-                handleSendMessage();
-              }
-            }
-          }}
         />
         <button disabled={newMessage.trim() === '' || loading} onClick={handleSendMessage}>
           <Send className="send-icon" />
