@@ -393,7 +393,7 @@ const ViewPostModal = ({ onLoad, onClose, postData }) => {
                         <input
                             ref={commentInputRef}
                             type="text"
-                            placeholder="Add a comment..."
+                            placeholder={text.type === "Reply" ? "Add a reply..." : "Add a comment..."}
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                         />
