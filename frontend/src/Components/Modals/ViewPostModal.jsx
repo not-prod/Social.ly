@@ -120,6 +120,15 @@ const ViewPostModal = ({ onLoad, onClose, postData }) => {
             dispatch(updatePost(text.id, inputText));
         }
     };
+        //added enter & shift key
+        const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+        handleSend();
+        }
+        if (event.altKey && event.shiftKey) {
+        setInputText((prev) => prev + "\n");
+        }
+    };
 
     useEffect(() => {
         if(comments) {
@@ -390,13 +399,13 @@ const ViewPostModal = ({ onLoad, onClose, postData }) => {
 
 
                     <div className="comment-input">
-                        <input
-                            ref={commentInputRef}
-                            type="text"
-                            placeholder={`Add a ${text.type.toLowerCase()}...`}
-                            value={inputText}
-                            onChange={(e) => setInputText(e.target.value)}
-                        />
+                       <textarea onKeyDown={handleKeyDown}
+                        ref={commentInputRef}
+                        placeholder={`Add a ${text.type.toLowerCase()}...`}
+                        value={inputText}
+                        onChange={(e) => setInputText(e.target.value)}
+                        className="text-box"
+                    />
                         <button disabled={inputText.trim() === "" || loading || replyLoading || postLoading} onClick={() => handleSend()}>
                             <Send className="comment-icon" />
                         </button>
